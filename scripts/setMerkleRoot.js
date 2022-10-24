@@ -1,6 +1,6 @@
 /**
  *   This script will calculate the merkle root from the whitelist array and set it to the contract
- *   using the `setMerkleRoot` function defined in BestApe.sol contract. For this script to work your contract
+ *   using the `setMerkleRoot` function defined in Shiwa.sol contract. For this script to work your contract
  *   already should be deployed and you should have the deployed contract address. If you make a change in whitelist.js
  *   make sure you update the merkleroot in the contract using the script `scripts/setMerkleRoot.js`
  */
@@ -11,7 +11,7 @@ const keccak256 = require('keccak256')
 const whitelist = require('./whitelist.js')
 
 async function main() {
-  const nftFactory = await hre.ethers.getContractFactory('BestApe')
+  const nftFactory = await hre.ethers.getContractFactory('SHIWA')
   const nftContract = await nftFactory.attach(
     '0x019f3b4c281dA5bad2DC70A0B19F578b542E46B3' // Deployed contract address
   )

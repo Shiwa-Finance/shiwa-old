@@ -125,12 +125,12 @@ export default function Mint() {
     <div className="min-h-screen h-full w-full overflow-hidden flex flex-col items-center justify-center bg-brand-background ">
       <div className="relative w-full h-full flex flex-col items-center justify-center">
         <img
-          src="/images/blur.jpeg"
+          src="/images/blur.jpg"
           className="animate-pulse-slow absolute inset-auto block w-full min-h-screen object-cover"
         />
 
         <div className="flex flex-col items-center justify-center h-full w-full px-2 md:px-10">
-          <div className="relative z-1 md:max-w-3xl w-full bg-gray-900/90 filter backdrop-blur-sm py-4 rounded-md px-2 md:px-10 flex flex-col items-center">
+          <div className="relative z-1 md:max-w-3xl w-full bg-brand-bg filter backdrop-blur-sm py-4 rounded-md px-2 md:px-10 flex flex-col items-center">
             {wallet && (
               <button
                 className="absolute right-4 bg-indigo-600 transition duration-200 ease-in-out font-chalk border-2 border-[rgba(0,0,0,1)] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] active:shadow-none px-4 py-2 rounded-md text-sm text-white tracking-wide uppercase"
@@ -165,7 +165,7 @@ export default function Mint() {
 
                 <img
                   src="/images/13.png"
-                  className="object-cover w-full sm:h-[280px] md:w-[250px] rounded-md"
+                  className="object-cover w-full p-8 sm:h-[280px] md:w-[250px] rounded-md"
                 />
               </div>
 
@@ -221,17 +221,16 @@ export default function Mint() {
                 </p>
 
                 <div className="border-t border-b py-4 mt-16 w-full">
-                  <div className="w-full text-xl font-coiny flex items-center justify-between text-brand-yellow">
-                    <p>Total</p>
+                  <div className="w-full text-lg font-coiny flex items-center justify-between text-brand-yellow">
+                    <p>Total = </p>
 
                     <div className="flex items-center space-x-3">
                       <p>
                         {Number.parseFloat(config.price * mintAmount).toFixed(
                           2
                         )}{' '}
-                        ETH
                       </p>{' '}
-                      <span className="text-gray-400">+ GAS</span>
+                      <span className="text-gray-400 text-xs">SHIWA</span>
                     </div>
                   </div>
                 </div>
@@ -279,7 +278,7 @@ export default function Mint() {
                 Contract Address
               </h3>
               <a
-                href={`https://rinkeby.etherscan.io/address/${config.contractAddress}#readContract`}
+                href={`https://goerli.etherscan.io/address/${config.contractAddress}#readContract`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 mt-4"

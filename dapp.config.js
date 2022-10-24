@@ -1,10 +1,11 @@
 const config = {
-  title: 'BestApe Dapp',
-  description: 'A showcase dapp which is built for you to create your own',
-  contractAddress: '0x019f3b4c281dA5bad2DC70A0B19F578b542E46B3',
-  maxMintAmount: 10,
+  title: 'SHIWA NFT Dapp',
+  description: 'An NFT minting Dapp for SHIWA',
+  contractAddress: '0xfaf7C6EBF24B2ADa72aae1DC17d6B31639dbeb91',
+  tokenAddress: '0xA0A9547Fe031b778CD6788B3a1EC9D86cfcd8046',
+  maxMintAmount: 3,
   presaleMaxMintAmount: 3,
-  price: 0.01
+  price: 880
 }
 
 export { config }

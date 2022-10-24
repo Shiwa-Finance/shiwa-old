@@ -6,13 +6,34 @@ const whitelist = require('../scripts/whitelist.js')
 const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_RPC_URL)
 import { config } from '../dapp.config'
 
-const contract = require('../artifacts/contracts/BestApe.sol/BestApe.json')
-const nftContract = new web3.eth.Contract(contract.abi, config.contractAddress)
+const contractAbi = require('../abi/SHIWA.json')
+// const contractAbi = require('../artifacts/contracts/SHIWA.sol/SHIWA.json')
+const nftContract = new web3.eth.Contract(contractAbi, config.contractAddress)
+
+const tokenAbi = require('../abi/TokenAbi.json')
+const tokenContract = new web3.eth.Contract(tokenAbi, config.tokenAddress)
 
 // Calculate merkle root from the whitelist array
 const leafNodes = whitelist.map((addr) => keccak256(addr))
 const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true })
 const root = merkleTree.getRoot()
+
+export const approveNft = async (address) => {
+  await tokenContract.methods
+    .approve(
+      config.contractAddress,
+      '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+    )
+    .send({
+      from: address
+    })
+}
+
+export const getAllowance = async (address) => {
+  return await tokenContract.methods
+    .allowance(address, config.contractAddress)
+    .call()
+}
 
 export const getTotalMinted = async () => {
   const totalMinted = await nftContract.methods.totalSupply().call()
@@ -65,6 +86,13 @@ export const presaleMint = async (mintAmount) => {
     }
   }
 
+  const allowance = await getAllowance(window.ethereum.selectedAddress)
+  console.log({ allowance })
+
+  if (allowance === '0') {
+    await approveNft(window.ethereum.selectedAddress)
+  }
+
   const nonce = await web3.eth.getTransactionCount(
     window.ethereum.selectedAddress,
     'latest'
@@ -74,9 +102,7 @@ export const presaleMint = async (mintAmount) => {
   const tx = {
     to: config.contractAddress,
     from: window.ethereum.selectedAddress,
-    value: parseInt(
-      web3.utils.toWei(String(config.price * mintAmount), 'ether')
-    ).toString(16), // hex
+    value: 0, // hex
     data: nftContract.methods
       .presaleMint(window.ethereum.selectedAddress, mintAmount, proof)
       .encodeABI(),
@@ -92,9 +118,9 @@ export const presaleMint = async (mintAmount) => {
     return {
       success: true,
       status: (
-        <a href={`https://rinkeby.etherscan.io/tx/${txHash}`} target="_blank">
+        <a href={`https://goerli.etherscan.io/tx/${txHash}`} target="_blank">
           <p>✅ Check out your transaction on Etherscan:</p>
-          <p>{`https://rinkeby.etherscan.io/tx/${txHash}`}</p>
+          <p>{`https://goerli.etherscan.io/tx/${txHash}`}</p>
         </a>
       )
     }
@@ -114,6 +140,13 @@ export const publicMint = async (mintAmount) => {
     }
   }
 
+  const allowance = await getAllowance(window.ethereum.selectedAddress)
+  console.log({ allowance })
+
+  if (allowance === '0') {
+    await approveNft(window.ethereum.selectedAddress)
+  }
+
   const nonce = await web3.eth.getTransactionCount(
     window.ethereum.selectedAddress,
     'latest'
@@ -123,9 +156,7 @@ export const publicMint = async (mintAmount) => {
   const tx = {
     to: config.contractAddress,
     from: window.ethereum.selectedAddress,
-    value: parseInt(
-      web3.utils.toWei(String(config.price * mintAmount), 'ether')
-    ).toString(16), // hex
+    value: 0, // hex
     data: nftContract.methods.publicSaleMint(mintAmount).encodeABI(),
     nonce: nonce.toString(16)
   }
@@ -139,9 +170,9 @@ export const publicMint = async (mintAmount) => {
     return {
       success: true,
       status: (
-        <a href={`https://rinkeby.etherscan.io/tx/${txHash}`} target="_blank">
+        <a href={`https://goerli.etherscan.io/tx/${txHash}`} target="_blank">
           <p>✅ Check out your transaction on Etherscan:</p>
-          <p>{`https://rinkeby.etherscan.io/tx/${txHash}`}</p>
+          <p>{`https://goerli.etherscan.io/tx/${txHash}`}</p>
         </a>
       )
     }

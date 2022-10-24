@@ -19,12 +19,12 @@ const coinbaseWallet = coinbaseModule()
 const initOnboard = init({
   wallets: [walletConnect, coinbaseWallet, injected, fortmatic],
   chains: [
-    // {
-    //   id: '0x1',
-    //   token: 'ETH',
-    //   label: 'Ethereum Mainnet',
-    //   rpcUrl: 'https://mainnet.infura.io/v3/ababf9851fd845d0a167825f97eeb12b'
-    // },
+    {
+      id: '0x1',
+      token: 'ETH',
+      label: 'Ethereum Mainnet',
+      rpcUrl: 'https://mainnet.infura.io/v3/ababf9851fd845d0a167825f97eeb12b'
+    },
     // {
     //   id: '0x3',
     //   token: 'tROP',
@@ -32,9 +32,9 @@ const initOnboard = init({
     //   rpcUrl: 'https://ropsten.infura.io/v3/ababf9851fd845d0a167825f97eeb12b'
     // },
     {
-      id: '0x4',
-      token: 'rETH',
-      label: 'Ethereum Rinkeby Testnet',
+      id: '0x5',
+      token: 'gETH',
+      label: 'Ethereum Goerli Testnet',
       rpcUrl: RPC_URL
     }
     // {
@@ -45,9 +45,9 @@ const initOnboard = init({
     // }
   ],
   appMetadata: {
-    name: 'BestApe',
+    name: 'SHIWA',
     icon: ApeIcon,
-    description: 'We are some bored apes',
+    description: 'Shiwa unique NFT',
     recommendedInjectedWallets: [
       { name: 'MetaMask', url: 'https://metamask.io' },
       { name: 'Coinbase', url: 'https://wallet.coinbase.com/' }

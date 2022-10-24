@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "OwnableDelegateProxy",
+  "sourceName": "contracts/SHIWA.sol",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122070377fd5fff57821a6d3d2c6db0e14aaf143d566392977c1bc5880e1acb85f7c64736f6c63430008090033",
+  "deployedBytecode": "0x6080604052600080fdfea264697066735822122070377fd5fff57821a6d3d2c6db0e14aaf143d566392977c1bc5880e1acb85f7c64736f6c63430008090033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
