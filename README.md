@@ -1,1 +1,1 @@
-# SHIWA NFT Minting dApp
+# V1 discontinuted Shiwa Dapp
